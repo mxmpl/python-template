@@ -1,0 +1,7 @@
+.vscode
+*.code-workspace
+*.pdf
+*.png
+*.egg-info
+__pycache__
+.coverage
