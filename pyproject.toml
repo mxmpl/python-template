@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "myproject"
+version = "1.0.0"
+description = "My awesome project"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+authors = [{name = "Maxime Poli"}]
+dynamic = ["dependencies"]
+
+[project.scripts]
+myproject = "myproject.cli:main"
+
+[project.urls]
+repository = "https://github.com/mxmpl/python-template"
+
+[project.optional-dependencies]
+test = ["pytest", "pytest-cov"]
+dev = ["ipykernel", "black", "isort"]
+
+[tool.setuptools]
+packages = ["myproject"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = "requirements.txt"}
+
+[tool.black]
+line-length = 80
+
+[tool.isort]
+line_length = 80
+profile = "black"
+known_first_party = ["myproject"]
+
+[tool.pytest.ini_options]
+addopts = "--verbose --cov=myproject --cov-report=html --cov-report=term:skip-covered -W ignore::DeprecationWarning"
+testpaths = ["tests", "myproject"]
+
+[tool.coverage.run]
+branch = false
+omit = ["myproject/cli.py"]
